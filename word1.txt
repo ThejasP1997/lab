@@ -1,0 +1,21 @@
+%{
+#include<stdio.h>
+int cc=0,wc=0,sc=0,lc=0;
+%}
+word [^ \t\n]+
+space [ ]
+line [\n]
+%%
+{word} {wc++;cc+=yyleng;}
+{space} {sc++;cc++;}
+[\t] {sc+=6;cc+=6;}
+{line} lc++;
+%%
+void main(int argc,char**argv)
+{
+FILE *fp;
+fp=fopen(argv[1],"r");
+yyin=fp;
+yylex();
+printf("cc=%d wc=%d sc=%d lc=%d",cc,wc,sc,lc);
+}

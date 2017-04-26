@@ -1,0 +1,32 @@
+
+%{
+	#include<stdio.h>
+	#include<stdlib.h>
+	int yyerror();
+	int yylex();
+%}
+%token ID NUM
+%left '+''-'
+%left '*''/'
+%%
+stmt : expr '\n'     {printf("valid expression");
+     				exit(0);}
+     ;
+expr:'('expr')'
+    |expr'+'expr	
+    |expr'-'expr 
+    |expr'*'expr
+    |expr'/'expr 
+    |ID	
+    |NUM
+    ;
+%%
+void main()
+{
+	printf("enter an expresiion:");
+	yyparse();
+}
+int yyerror()
+{
+	printf("invalid expression");
+}

@@ -1,0 +1,53 @@
+/*%{
+#include<stdio.h>
+#include<stdlib.h>
+int yyerror();
+int yylex();
+%}
+%token LETTER DIGIT
+%%
+stmt:LETTER var'\n' {printf("valid identifier\n");exit(0);}
+        ;
+var:var LETTER
+      |var DIGIT
+   |
+   ;
+%%
+void main()
+{
+printf("enter a expression\n");
+yyparse();
+}
+int yyerror()
+{
+printf("invalid identifier\n");
+}*/
+
+
+
+
+
+%{
+#include<stdio.h>
+#include<stdlib.h>
+int yyerror();
+int yylex();
+%}
+%token LETTER DIGIT
+%%
+stmt:LETTER var'\n' {printf("valid identifier\n");exit(0);}
+        ;
+var:var LETTER 
+     |var DIGIT
+   |
+   ;
+%%
+void main()
+{
+printf("enter a expression\n");
+yyparse();
+}
+int yyerror()
+{
+printf("invalid identifier\n");
+}

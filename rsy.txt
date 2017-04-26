@@ -1,0 +1,27 @@
+%{
+#include<stdio.h>
+#include<stdlib.h>
+int yyerror();
+int yylex();
+%}
+%token A B
+%%
+stm:A recA recB '\n' {printf("valid string\n");
+   			exit(0);}
+	;
+recA:A recA
+    |
+    ;
+recB:B recB
+    |
+    ;
+%%
+void main()
+{
+printf("enter a string\n");
+yyparse();
+}
+int yyerror()
+{
+printf("\n invalid string");
+}
